@@ -3,9 +3,11 @@ package br.com.livrariaWeb.loja.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import br.com.livrariaWeb.loja.dao.ProdutoDAO;
 import br.com.livrariaWeb.loja.models.Produto;
+import br.com.livrariaWeb.loja.models.TipoPreco;
 
 @Controller
 public class ProdutosController {
@@ -14,10 +16,14 @@ public class ProdutosController {
 	private ProdutoDAO produtoDao;
 	
 	@RequestMapping("/produtos/form")
-	public String form() {
-		
-		return "produtos/form";
-	}
+    public ModelAndView form() {
+
+        ModelAndView modelAndView = new ModelAndView("produtos/form");
+        modelAndView.addObject("tipos", TipoPreco.values());
+
+        return modelAndView;
+
+    }
 	
 	@RequestMapping("/produtos")
 	public String grava(Produto produto) {

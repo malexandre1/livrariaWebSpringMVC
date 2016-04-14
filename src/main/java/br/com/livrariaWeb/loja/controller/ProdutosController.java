@@ -27,7 +27,7 @@ public class ProdutosController {
 	private ProdutoDAO produtoDao;
 	
 	@RequestMapping("/form")
-    public ModelAndView form() {
+    public ModelAndView form(Produto produto) {
 
         ModelAndView modelAndView = new ModelAndView("produtos/form");
         modelAndView.addObject("tipos", TipoPreco.values());
@@ -40,7 +40,7 @@ public class ProdutosController {
     public ModelAndView grava(@Valid Produto produto, BindingResult result, RedirectAttributes redirectAttributes) {
 		System.out.println(produto);
 		if(result.hasErrors()) {
-            return form();
+            return form(produto);
         }
 		
         produtoDao.gravar(produto);

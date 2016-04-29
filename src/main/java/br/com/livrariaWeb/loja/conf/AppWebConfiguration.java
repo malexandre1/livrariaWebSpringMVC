@@ -16,9 +16,11 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import br.com.livrariaWeb.loja.controller.HomeController;
 import br.com.livrariaWeb.loja.dao.ProdutoDAO;
 import br.com.livrariaWeb.loja.infra.FileSaver;
+import br.com.livrariaWeb.loja.models.CarrinhoCompras;
 
 @EnableWebMvc
-@ComponentScan(basePackageClasses={HomeController.class, ProdutoDAO.class, FileSaver.class})
+@ComponentScan(basePackageClasses={HomeController.class, ProdutoDAO.class, FileSaver.class,
+		CarrinhoCompras.class})
 public class AppWebConfiguration {
 
 	@Bean
@@ -26,6 +28,8 @@ public class AppWebConfiguration {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
 		resolver.setPrefix("/WEB-INF/views/");
 		resolver.setSuffix(".jsp");
+		
+		resolver.setExposedContextBeanNames("carrinhoCompras");
 		
 		return resolver;
 	}
